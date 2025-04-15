@@ -1,0 +1,27 @@
+[package]
+name = "exchange"
+version = "0.0.0"
+edition = "2024"
+description = "Telegram bot exchange written in Rust."
+keywords = ["tg", "bot", "teloxide"]
+license-file = "LICENSE"
+authors = ["Yavorsky Sergey <maclovi.dev@gmail.com>"]
+homepage = "https://github.com/Maclovi/exchange"
+readme = "README.md"
+
+[dependencies]
+teloxide = { version = "0.15.0", features = ["macros"] }
+log = "0.4"
+pretty_env_logger = "0.5"
+tokio = { version =  "1.8", features = ["rt-multi-thread", "macros"] }
+
+[[bin]]
+name = "exchange"
+
+[profile.release]
+debug = false
+lto = "fat"
+panic = "abort"
+opt-level = 3
+codegen-units = 1
+strip = true

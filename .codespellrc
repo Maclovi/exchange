@@ -1,0 +1,4 @@
+[codespell]
+skip = *.po,*.ts,./target/*,./src/3rdParty
+count = true
+quiet-level = 3

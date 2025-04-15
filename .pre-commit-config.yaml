@@ -1,0 +1,40 @@
+default_stages: [pre-commit, manual]
+repos:
+  - repo: https://github.com/compilerla/conventional-pre-commit
+    rev: v4.0.0
+    hooks:
+      - id: conventional-pre-commit
+        stages: [commit-msg]
+        args: ["--strict", "--types", "feat,fix,docs,chore,style,refactor,test"]
+
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.4.1
+    hooks:
+      - id: codespell
+        args: ["--config", ".codespellrc"]
+        files: \.(rs|md|toml|yaml)$
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: check-yaml
+      - id: check-toml
+      - id: check-case-conflict
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+      - id: trailing-whitespace
+      - id: detect-private-key
+      - id: check-added-large-files
+        args: ["--maxkb=500"]
+
+  - repo: local
+    hooks:
+      - id: Cargo lint
+        name: Cargo linter
+        entry: just
+        language: rust
+        types: [rust]
+        require_serial: true
+        verbose: true
+        pass_filenames: false
+        args: [lint]
